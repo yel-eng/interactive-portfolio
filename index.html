@@ -1,229 +1,231 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Yosra El Masry — Front‑End Developer</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{--accent:#6f42c1;--muted:#65748b}
-    body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,'Helvetica Neue',Arial;line-height:1.6;color:#0f1724}
-    .hero{background:linear-gradient(180deg, rgba(111,66,193,0.08), rgba(111,66,193,0.02));padding:60px 0}
-    .name{font-weight:700;font-size:1.9rem}
-    .role{color:var(--accent);font-weight:600}
-    .tag{background:rgba(111,66,193,0.08);color:var(--accent);padding:6px 10px;border-radius:999px;font-weight:600}
-    .card-project{border:0;box-shadow:0 6px 20px rgba(12,15,30,0.06);transition:transform .22s ease}
-    .card-project:hover{transform:translateY(-6px)}
-    .skill-bar{height:10px;border-radius:999px;background:#e9edf2;overflow:hidden}
-    .skill-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),#0ea5a5)}
-    .fade-up{transform:translateY(14px);opacity:0;transition:all .6s ease}
-    .fade-up.in{transform:none;opacity:1}
-    footer{padding:30px 0;background:#fbfbfd;color:#6b7280}
-    @media(min-width:992px){.hero{padding:84px 0}.name{font-size:2.4rem}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yosra | Creative Front-End Developer</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    background:#0b0f1a;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* glowing background */
+body::before{
+    content:'';
+    position:fixed;
+    width:400px;
+    height:400px;
+    background:#00f5ff;
+    filter:blur(150px);
+    top:-100px;
+    left:-100px;
+    opacity:0.4;
+}
+
+body::after{
+    content:'';
+    position:fixed;
+    width:400px;
+    height:400px;
+    background:#ff00ff;
+    filter:blur(150px);
+    bottom:-100px;
+    right:-100px;
+    opacity:0.3;
+}
+
+header{
+    padding:40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h2{
+    font-size:22px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 10px;
+    font-size:14px;
+    opacity:0.8;
+}
+
+nav a:hover{
+    opacity:1;
+}
+
+/* HERO */
+.hero{
+    text-align:center;
+    padding:80px 20px;
+}
+
+.hero h1{
+    font-size:50px;
+    background:linear-gradient(90deg,#00f5ff,#ff00ff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    margin-top:15px;
+    opacity:0.8;
+}
+
+/* buttons */
+.btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:10px 20px;
+    border:1px solid #00f5ff;
+    color:white;
+    border-radius:30px;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#00f5ff;
+    color:black;
+}
+
+/* section */
+section{
+    padding:60px 20px;
+    max-width:1100px;
+    margin:auto;
+}
+
+/* cards */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    backdrop-filter:blur(10px);
+    padding:20px;
+    border-radius:15px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border-color:#00f5ff;
+}
+
+.card h3{
+    margin-bottom:10px;
+    color:#00f5ff;
+}
+
+.card a{
+    display:inline-block;
+    margin-top:10px;
+    color:#ff00ff;
+    text-decoration:none;
+    font-size:13px;
+}
+
+/* footer */
+footer{
+    text-align:center;
+    padding:40px;
+    opacity:0.6;
+}
+</style>
 </head>
+
 <body>
-  <nav class="navbar navbar-expand-lg bg-white py-3 shadow-sm">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-        <div style="width:44px;height:44px;background:linear-gradient(135deg,var(--accent),#0ea5a5);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">Y</div>
-        <div class="d-none d-lg-block">
-          <div class="fw-bold">Yosra El Masry</div>
-          <small class="text-muted">Front‑End Developer</small>
+
+<header>
+    <h2>⚡ Yosra.dev</h2>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<div class="hero">
+    <h1>Creative Front-End Developer</h1>
+    <p>I build modern, interactive and clean web experiences</p>
+
+    <a class="btn" href="https://github.com/yel-eng" target="_blank">View GitHub</a>
+    <a class="btn" href="https://www.linkedin.com/in/yosra-elmasry-137689198" target="_blank">LinkedIn</a>
+</div>
+
+<section id="about">
+    <h2>About Me</h2>
+    <p style="opacity:0.8; margin-top:10px;">
+        I am a Front-End Developer passionate about creating modern UI experiences using HTML, CSS, JavaScript and Bootstrap.
+        I focus on building real-world projects with clean design and smooth user experience.
+    </p>
+</section>
+
+<section id="projects">
+    <h2>My Universe 🚀 Projects</h2>
+    <br>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>Petit Girard</h3>
+            <p>Nursery website with multi-page structure and UI design.</p>
+            <a href="https://yel-eng.github.io/-Petit-Girard-Website/index.html" target="_blank">Live Demo →</a>
         </div>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav ms-auto align-items-lg-center">
-          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link btn btn-outline-primary ms-2" href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
 
-  <header class="hero">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6 mb-4 mb-lg-0">
-          <div class="tag mb-3">Front‑End Developer • WordPress • JavaScript</div>
-          <h1 class="name">Hi, I'm <span class="role">Yosra El Masry</span></h1>
-          <p class="mb-3 text-muted">I build responsive, user‑friendly websites and interactive front‑end experiences using HTML, CSS, JavaScript (ES6+), Bootstrap and WordPress. I care about accessibility, performance and clear code.</p>
-          <div class="d-flex gap-2">
-            <a href="https://github.com/Yosra010" target="_blank" class="btn btn-primary">View GitHub</a>
-            <a href="https://www.linkedin.com/in/yosra-elmasry-137689198/" target="_blank" class="btn btn-outline-secondary">LinkedIn</a>
-            <a href="#contact" class="btn btn-light border">Hire Me</a>
-          </div>
+        <div class="card">
+            <h3>Grill Restaurant</h3>
+            <p>Modern restaurant landing page UI.</p>
+            <a href="https://yel-eng.github.io/grill/index.html" target="_blank">Live Demo →</a>
         </div>
-        <div class="col-lg-6 text-center">
-          <div style="max-width:380px;margin:0 auto;">
-            <img src="https://raw.githubusercontent.com/Yosra010/interactive-portfolio/main/assets/hero-screenshot.png" alt="portfolio preview" class="img-fluid rounded shadow-sm">
-          </div>
+
+        <div class="card">
+            <h3>Perlla App</h3>
+            <p>Interactive posts-based web application.</p>
+            <a href="https://yel-eng.github.io/perlla/index.html#posts" target="_blank">Live Demo →</a>
         </div>
-      </div>
-    </div>
-  </header>
 
-  <main class="py-5">
-    <div class="container">
-
-      <!-- Projects -->
-      <section id="projects" class="mb-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h2 class="h4">Featured Projects</h2>
-          <a href="#" class="text-decoration-none">See all projects →</a>
+        <div class="card">
+            <h3>Labor Law Analyzer</h3>
+            <p>Data-driven web tool for structured content display.</p>
+            <a href="https://yel-eng.github.io/labor-law-analyzer-2025/index.html#posts" target="_blank">Live Demo →</a>
         </div>
-        <div class="row g-4">
-
-          <div class="col-md-6 col-lg-4">
-            <div class="card card-project h-100">
-              <img src="https://raw.githubusercontent.com/Yosra010/interactive-portfolio/main/assets/project-1.png" class="card-img-top" alt="Project 1">
-              <div class="card-body">
-                <h5 class="card-title">Interactive Portfolio</h5>
-                <p class="card-text text-muted small">Personal portfolio showcasing projects, responsive layouts and JS interactions.</p>
-                <div class="d-flex gap-2">
-                  <a href="https://yosra010.github.io/interactive-portfolio/" target="_blank" class="btn btn-sm btn-outline-primary">Live Demo</a>
-                  <a href="https://github.com/Yosra010/interactive-portfolio" target="_blank" class="btn btn-sm btn-primary">Source</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4">
-            <div class="card card-project h-100">
-              <img src="https://raw.githubusercontent.com/Yosra010/interactive-portfolio/main/assets/project-2.png" class="card-img-top" alt="Project 2">
-              <div class="card-body">
-                <h5 class="card-title">E‑Commerce Cart</h5>
-                <p class="card-text text-muted small">JS cart system with add/remove, quantity and price calculations.</p>
-                <div class="d-flex gap-2">
-                  <a href="#" class="btn btn-sm btn-outline-primary">Live Demo</a>
-                  <a href="#" class="btn btn-sm btn-primary">Source</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4">
-            <div class="card card-project h-100">
-              <img src="https://raw.githubusercontent.com/Yosra010/interactive-portfolio/main/assets/project-3.png" class="card-img-top" alt="Project 3">
-              <div class="card-body">
-                <h5 class="card-title">Restaurant Landing</h5>
-                <p class="card-text text-muted small">Responsive landing page with modern layout and animations.</p>
-                <div class="d-flex gap-2">
-                  <a href="#" class="btn btn-sm btn-outline-primary">Live Demo</a>
-                  <a href="#" class="btn btn-sm btn-primary">Source</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- Skills -->
-      <section id="skills" class="mb-5">
-        <h3 class="h5 mb-3">Skills</h3>
-        <div class="row g-3">
-          <div class="col-md-6">
-            <div class="mb-3">
-              <div class="d-flex justify-content-between"><small class="text-muted">HTML / CSS</small><small class="fw-bold">90%</small></div>
-              <div class="skill-bar mt-2"><div class="skill-fill" style="width:90%"></div></div>
-            </div>
-            <div class="mb-3">
-              <div class="d-flex justify-content-between"><small class="text-muted">JavaScript (ES6+)</small><small class="fw-bold">75%</small></div>
-              <div class="skill-bar mt-2"><div class="skill-fill" style="width:75%"></div></div>
-            </div>
-            <div class="mb-3">
-              <div class="d-flex justify-content-between"><small class="text-muted">Bootstrap</small><small class="fw-bold">85%</small></div>
-              <div class="skill-bar mt-2"><div class="skill-fill" style="width:85%"></div></div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="mb-3">
-              <div class="d-flex justify-content-between"><small class="text-muted">WordPress</small><small class="fw-bold">80%</small></div>
-              <div class="skill-bar mt-2"><div class="skill-fill" style="width:80%"></div></div>
-            </div>
-            <div class="mb-3">
-              <div class="d-flex justify-content-between"><small class="text-muted">Git / GitHub</small><small class="fw-bold">70%</small></div>
-              <div class="skill-bar mt-2"><div class="skill-fill" style="width:70%"></div></div>
-            </div>
-            <div class="mb-3">
-              <div class="d-flex justify-content-between"><small class="text-muted">UI / UX Basics</small><small class="fw-bold">75%</small></div>
-              <div class="skill-bar mt-2"><div class="skill-fill" style="width:75%"></div></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- About -->
-      <section id="about" class="mb-5">
-        <h3 class="h5">About Me</h3>
-        <p class="text-muted">I’m a Front‑End Developer based in Alexandria. I enjoy turning ideas into beautiful, accessible interfaces. I also have experience teaching front‑end basics and building WordPress sites. When I’m not coding I read about UX and try small UI experiments.</p>
-        <div class="d-flex gap-2">
-          <a href="#contact" class="btn btn-outline-primary">Contact Me</a>
-          <a href="#projects" class="btn btn-light border">See Work</a>
-        </div>
-      </section>
-
-      <!-- Contact -->
-      <section id="contact" class="mb-5">
-        <h3 class="h5">Get in touch</h3>
-        <div class="row">
-          <div class="col-md-6">
-            <form onsubmit="handleContact(event)">
-              <div class="mb-3"><label class="form-label">Name</label><input class="form-control" id="name"></div>
-              <div class="mb-3"><label class="form-label">Email</label><input class="form-control" id="email" type="email"></div>
-              <div class="mb-3"><label class="form-label">Message</label><textarea class="form-control" id="message" rows="4"></textarea></div>
-              <button class="btn btn-primary">Send message</button>
-            </form>
-          </div>
-          <div class="col-md-6">
-            <div class="p-4 rounded" style="background:#fbfbfd;border:1px solid #f1f5f9">
-              <h6>Contact Info</h6>
-              <p class="mb-1"><strong>Email:</strong> <a href="mailto:yosra.elmasry.123@gmail.com">yosra.elmasry.123@gmail.com</a></p>
-              <p class="mb-1"><strong>Phone:</strong> 01227630041</p>
-              <p class="mb-0"><strong>Location:</strong> Alexandria, Egypt</p>
-              <hr>
-              <p class="small text-muted">Tip: Replace the contact form handler with an actual back-end or a service like Formspree/EmailJS to receive messages.</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
     </div>
-  </main>
+</section>
 
-  <footer>
-    <div class="container text-center">
-      <p class="mb-1">© <strong>Yosra El Masry</strong> — Front‑End Developer</p>
-      <p class="small">Built with HTML, CSS, JavaScript & Bootstrap • <a href="https://github.com/Yosra010" target="_blank">GitHub</a> • <a href="https://www.linkedin.com/in/yosra-elmasry-137689198/" target="_blank">LinkedIn</a></p>
+<section id="contact">
+    <h2>Contact</h2>
+    <div class="card" style="margin-top:15px;">
+        <p>Email: your-email@gmail.com</p>
+        <p>GitHub: <a href="https://github.com/yel-eng" target="_blank">yel-eng</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/yosra-elmasry-137689198" target="_blank">Profile</a></p>
     </div>
-  </footer>
+</section>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Simple intersection observer for subtle reveal
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in') })
-    },{threshold:.12})
-    document.querySelectorAll('.fade-up').forEach(el=>io.observe(el))
+<footer>
+    Designed with ⚡ creativity by Yosra
+</footer>
 
-    // Contact form (demo only)
-    function handleContact(e){
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-      if(!name||!email||!message){ alert('Please complete all fields'); return }
-      // For production: call a backend or service (EmailJS/Formspree)
-      alert('Thanks '+name+' — message sent (demo). Replace this with a real handler to receive messages.');
-      e.target.reset();
-    }
-  </script>
 </body>
 </html>
