@@ -55,7 +55,7 @@ button{cursor:pointer;border:none;font-family:inherit}
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:120px 5% 80px}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 30%,rgba(201,168,76,.05) 0%,transparent 70%),radial-gradient(ellipse 35% 35% at 15% 85%,rgba(74,144,217,.04) 0%,transparent 50%),radial-gradient(ellipse 35% 35% at 85% 85%,rgba(123,94,167,.04) 0%,transparent 50%)}
 
-/* ✨ HERO SPHERE - الكرة السحرية */
+/* ✨ HERO SPHERE */
 .hero-sphere-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;pointer-events:none;z-index:1}
 .hero-sphere{
   position:absolute;inset:0;border-radius:50%;
@@ -79,7 +79,6 @@ button{cursor:pointer;border:none;font-family:inherit}
 @keyframes sphereGlow{0%,100%{box-shadow:0 0 80px rgba(201,168,76,.12),inset 0 0 60px rgba(201,168,76,.05)}50%{box-shadow:0 0 120px rgba(201,168,76,.25),inset 0 0 80px rgba(201,168,76,.1)}}
 @keyframes sphereRing{to{transform:rotate(360deg)}}
 
-/* ✨ Floating particles around sphere */
 .sphere-particles{position:absolute;inset:-50px}
 .sphere-particle{
   position:absolute;width:4px;height:4px;border-radius:50%;
@@ -114,9 +113,9 @@ button{cursor:pointer;border:none;font-family:inherit}
 .scroll-line{width:1px;height:45px;background:linear-gradient(180deg,var(--gold),transparent);animation:scrollPulse 2.5s ease-in-out infinite}
 @keyframes scrollPulse{0%,100%{opacity:.2;transform:scaleY(.4);transform-origin:top}50%{opacity:1;transform:scaleY(1)}}
 
-/* ========== CATEGORIES SECTION ========== */
+/* ========== CATEGORIES SECTION - SLIDER VERSION ========== */
 .categories-section{padding:60px 5% 120px;max-width:1400px;margin:0 auto;position:relative;z-index:2}
-.section-header{text-align:center;margin-bottom:70px}
+.section-header{text-align:center;margin-bottom:50px}
 .section-label{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
 .section-label::before,.section-label::after{content:'';width:40px;height:1px}
 .section-label::before{background:linear-gradient(270deg,var(--gold),transparent)}
@@ -124,187 +123,134 @@ button{cursor:pointer;border:none;font-family:inherit}
 .section-title{font-family:'Playfair Display',serif;font-size:clamp(30px,4vw,44px);margin-bottom:12px}
 .section-sub{color:var(--text-dim);font-size:14px}
 
-/* ========== PREMIUM CARDS WITH NATURE BACKGROUNDS ========== */
-.color-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:28px;
-  perspective:1200px;
+/* ✨ CREATIVE SLIDER CONTAINER */
+.slider-wrapper{position:relative;overflow:visible;padding:40px 0}
+.slider-track{
+  display:flex;gap:24px;transition:transform .6s cubic-bezier(.22,1,.36,1);
+  padding:20px 40px;scroll-snap-type:x mandatory;scroll-behavior:smooth;
 }
+.slider-track::-webkit-scrollbar{display:none}
 
-.color-card{
-  position:relative;
-  background:var(--card-bg);
-  backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);
-  border-radius:var(--radius);
-  border:1px solid rgba(201,168,76,.06);
-  overflow:hidden;
-  cursor:pointer;
-  opacity:0;
-  transform:translateY(60px) rotateX(8deg);
-  transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s ease,border-color .4s ease;
-  transform-style:preserve-3d;
+/* ✨ SLIDER CARD */
+.slider-card{
+  flex:0 0 340px;scroll-snap-align:center;
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  cursor:pointer;transform-style:preserve-3d;
+  transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .4s ease;
+  background:var(--card-bg);backdrop-filter:blur(24px);
+  border:1px solid rgba(201,168,76,.08);
 }
-.color-card.revealed{opacity:1;transform:translateY(0) rotateX(0)}
+.slider-card:hover{transform:translateY(-12px) scale(1.03);z-index:10;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 60px rgba(201,168,76,.15)}
 
-/* ✨ Nature Background for Cards */
-.card-nature-bg{
-  position:absolute;inset:0;z-index:0;
-  background-size:cover;background-position:center;
-  background-repeat:no-repeat;
-  opacity:.18;transition:opacity .4s,transform .6s ease;
-  filter:blur(2px) brightness(.8);
+/* Nature Background for Slider Card */
+.slider-card::before{
+  content:'';position:absolute;inset:0;z-index:0;
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+  opacity:.25;transition:opacity .4s,transform .6s ease;
+  filter:blur(3px) brightness(.7);
 }
-.color-card:hover .card-nature-bg{opacity:.28;transform:scale(1.05)}
+.slider-card:hover::before{opacity:.35;transform:scale(1.08)}
 
-/* Overlay gradient for readability */
-.color-card::before{
+/* Gradient Overlay */
+.slider-card::after{
   content:'';position:absolute;inset:0;z-index:1;
-  background:linear-gradient(180deg,transparent 30%,var(--card-bg) 90%),
-             linear-gradient(0deg,rgba(18,14,12,.9) 0%,transparent 40%);
+  background:linear-gradient(180deg,transparent 20%,rgba(18,14,12,.95) 85%),
+             linear-gradient(90deg,rgba(18,14,12,.3) 0%,transparent 30%,transparent 70%,rgba(18,14,12,.3) 100%);
 }
 
-/* Animated gradient border */
-.color-card::after{
-  content:'';position:absolute;inset:-2px;border-radius:calc(var(--radius) + 2px);
-  background:conic-gradient(from var(--angle,0deg),transparent 0%,rgba(201,168,76,.3) 8%,transparent 16%,transparent 50%,rgba(201,168,76,.2) 58%,transparent 66%);
-  z-index:2;opacity:0;transition:opacity .4s;
-  animation:borderRotate 4s linear infinite paused;
+/* Animated Border */
+.slider-card .card-border{
+  position:absolute;inset:-2px;border-radius:calc(var(--radius) + 2px);
+  background:conic-gradient(from var(--angle,0deg),transparent,rgba(201,168,76,.4),transparent 30%,transparent 70%,rgba(201,168,76,.3),transparent);
+  z-index:2;opacity:0;transition:opacity .4s;animation:borderSpin 5s linear infinite paused;
 }
-.color-card:hover::after{opacity:1;animation-play-state:running}
-@keyframes borderRotate{to{--angle:360deg}}
+.slider-card:hover .card-border{opacity:1;animation-play-state:running}
+@keyframes borderSpin{to{--angle:360deg}}
 @property --angle{syntax:'<angle>';initial-value:0deg;inherits:false}
 
-/* ✨ Shimmer effect */
-.color-card .shimmer{
-  position:absolute;top:0;left:-100%;width:60%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(201,168,76,.08),transparent);
-  transform:skewX(-15deg);transition:left .6s ease;z-index:3;pointer-events:none;
+/* Shimmer Effect */
+.slider-card .shimmer{
+  position:absolute;top:0;left:-100%;width:50%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(201,168,76,.12),transparent);
+  transform:skewX(-20deg);transition:left .7s ease;z-index:3;pointer-events:none;
 }
-.color-card:hover .shimmer{left:160%}
-
-.color-card:hover{
-  border-color:rgba(201,168,76,.15);
-  box-shadow:0 25px 80px rgba(0,0,0,.5),0 0 40px rgba(201,168,76,.06);
-  transform:translateY(-8px) rotateX(2deg) scale(1.02);
-}
-
-/* ✨ Floating animation for cards */
-.color-card.revealed{animation:cardFloat 6s ease-in-out infinite}
-.color-card.revealed:nth-child(odd){animation-delay:1s}
-.color-card.revealed:nth-child(3n){animation-delay:2s}
-@keyframes cardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-
-/* Card Image Area */
-.card-visual{
-  position:relative;height:260px;overflow:hidden;z-index:4;
-  display:flex;align-items:center;justify-content:center;
-}
-.card-visual-bg{
-  position:absolute;inset:0;
-  transition:transform .6s cubic-bezier(.22,1,.36,1);
-}
-.color-card:hover .card-visual-bg{transform:scale(1.08)}
-.card-visual-bg::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 40%,var(--card-bg) 100%);
-}
-
-/* ✨ Floating lens sphere with pulse */
-.card-lens-sphere{
-  position:relative;z-index:5;
-  width:140px;height:140px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  transition:transform .6s cubic-bezier(.22,1,.36,1),box-shadow .6s ease;
-  animation:lensPulse 4s ease-in-out infinite;
-}
-@keyframes lensPulse{0%,100%{box-shadow:0 0 30px rgba(201,168,76,.1)}50%{box-shadow:0 0 50px rgba(201,168,76,.25)}}
-.card-lens-sphere::before{
-  content:'';position:absolute;inset:-4px;border-radius:50%;
-  border:1px solid rgba(255,255,255,.08);
-  animation:sphereRing 6s linear infinite;
-}
-@keyframes sphereRing{to{transform:rotate(360deg)}}
-.card-lens-sphere::after{
-  content:'';position:absolute;inset:20%;border-radius:50%;
-  background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.15),transparent 60%);
-}
-.color-card:hover .card-lens-sphere{transform:scale(1.12) translateY(-8px);animation-play-state:paused}
-
-.card-lens-inner{
-  width:120px;height:120px;border-radius:50%;
-  box-shadow:inset 0 0 30px rgba(0,0,0,.3),0 0 30px rgba(0,0,0,.2);
-}
-
-/* ✨ Color dots with bounce */
-.card-dots{
-  position:absolute;bottom:16px;left:50%;transform:translateX(-50%);
-  display:flex;gap:8px;z-index:6;
-}
-.card-dot{
-  width:22px;height:22px;border-radius:50%;
-  border:2px solid rgba(255,255,255,.12);
-  position:relative;overflow:hidden;
-  transition:transform .3s,box-shadow .3s;
-  animation:dotBounce 2s ease-in-out infinite;
-}
-.card-dot:nth-child(1){animation-delay:0s}
-.card-dot:nth-child(2){animation-delay:0.2s}
-.card-dot:nth-child(3){animation-delay:0.4s}
-.card-dot:nth-child(4){animation-delay:0.6s}
-@keyframes dotBounce{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
-.card-dot::after{
-  content:'';position:absolute;inset:30%;border-radius:50%;
-  background:linear-gradient(135deg,rgba(255,255,255,.2),transparent);
-}
-.color-card:hover .card-dot{transform:scale(1.15);box-shadow:0 2px 12px rgba(0,0,0,.4);animation-play-state:paused}
+.slider-card:hover .shimmer{left:150%}
 
 /* Card Content */
-.card-content{position:relative;z-index:7;padding:24px 28px}
+.card-visual{position:relative;height:200px;z-index:4;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.card-visual-bg{position:absolute;inset:0;transition:transform .6s ease}
+.slider-card:hover .card-visual-bg{transform:scale(1.1)}
+
+/* Lens Sphere */
+.card-lens-sphere{
+  position:relative;z-index:5;width:130px;height:130px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  animation:lensFloat 5s ease-in-out infinite;
+  transition:transform .5s ease,box-shadow .5s ease;
+}
+@keyframes lensFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.slider-card:hover .card-lens-sphere{transform:scale(1.15) translateY(-5px);animation-play-state:paused;box-shadow:0 0 40px rgba(201,168,76,.3)}
+.card-lens-sphere::before{
+  content:'';position:absolute;inset:-3px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.1);animation:ringSpin 8s linear infinite;
+}
+@keyframes ringSpin{to{transform:rotate(360deg)}}
+.card-lens-inner{width:110px;height:110px;border-radius:50%;box-shadow:inset 0 0 25px rgba(0,0,0,.4)}
+
+/* Color Dots */
+.card-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:6}
+.card-dot{width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,.15);position:relative;overflow:hidden;transition:transform .3s}
+.card-dot::after{content:'';position:absolute;inset:25%;border-radius:50%;background:linear-gradient(135deg,rgba(255,255,255,.25),transparent)}
+.slider-card:hover .card-dot{transform:scale(1.2)}
+
+/* Card Body */
+.card-body{position:relative;z-index:4;padding:20px 24px}
 .card-badge{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:5px 14px;border-radius:50px;
-  background:rgba(201,168,76,.08);
-  border:1px solid rgba(201,168,76,.1);
-  font-size:10px;color:var(--gold);letter-spacing:2px;
-  text-transform:uppercase;margin-bottom:14px;
-  animation:badgePulse 3s ease-in-out infinite;
+  display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:50px;
+  background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.15);
+  font-size:9px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;
 }
-@keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.2)}50%{box-shadow:0 0 0 8px rgba(201,168,76,0)}}
-.card-badge .badge-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:dotGlow 2s ease-in-out infinite}
-@keyframes dotGlow{0%,100%{opacity:1}50%{opacity:.5}}
-.card-name{
-  font-family:'Playfair Display',serif;
-  font-size:22px;font-weight:700;margin-bottom:8px;
-  transition:color .3s;
-}
-.color-card:hover .card-name{color:var(--gold-light)}
-.card-count{font-size:12px;color:var(--text-dim);margin-bottom:20px}
+.card-badge .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:pulseDot 2s infinite}
+@keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.4}}
+.card-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:6px;transition:color .3s}
+.slider-card:hover .card-name{color:var(--gold-light)}
+.card-count{font-size:11px;color:var(--text-dim);margin-bottom:16px}
 
-.card-footer{
-  display:flex;justify-content:space-between;align-items:center;
-  padding-top:16px;border-top:1px solid rgba(201,168,76,.06);
-}
-.card-price{font-size:14px;color:var(--text-dim)}
-.card-price strong{font-size:20px;color:var(--gold);font-weight:700}
-
+.card-footer{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid rgba(201,168,76,.08)}
+.card-price{font-size:13px;color:var(--text-dim)}
+.card-price strong{font-size:18px;color:var(--gold);font-weight:700}
 .card-btn{
-  padding:10px 24px;border-radius:50px;
-  background:linear-gradient(135deg,var(--gold),#b8943a);
-  color:var(--bg);font-weight:700;font-size:12px;letter-spacing:1px;
-  transition:all .3s;position:relative;overflow:hidden;
+  padding:8px 20px;border-radius:50px;background:linear-gradient(135deg,var(--gold),#b8943a);
+  color:var(--bg);font-weight:700;font-size:11px;letter-spacing:1px;transition:all .3s;position:relative;overflow:hidden;
 }
-.card-btn::before{
-  content:'';position:absolute;top:50%;left:50%;
-  width:0;height:0;border-radius:50%;
-  background:rgba(255,255,255,.25);
-  transform:translate(-50%,-50%);
-  transition:width .5s,height .5s;
-}
-.card-btn:hover::before{width:200px;height:200px}
-.card-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,.3)}
+.card-btn::before{content:'';position:absolute;top:50%;left:50%;width:0;height:0;border-radius:50%;background:rgba(255,255,255,.3);transform:translate(-50%,-50%);transition:width .5s,height .5s}
+.card-btn:hover::before{width:180px;height:180px}
+.card-btn:hover{transform:translateY(-2px);box-shadow:0 5px 20px rgba(201,168,76,.35)}
 .card-btn span{position:relative;z-index:1}
+
+/* Slider Navigation */
+.slider-nav{
+  position:absolute;top:50%;left:0;right:0;transform:translateY(-50%);
+  display:flex;justify-content:space-between;padding:0 10px;pointer-events:none;z-index:20;
+}
+.slider-btn{
+  width:50px;height:50px;border-radius:50%;
+  background:rgba(201,168,76,.1);backdrop-filter:blur(10px);
+  border:1px solid rgba(201,168,76,.2);color:var(--gold);
+  font-size:20px;display:flex;align-items:center;justify-content:center;
+  transition:all .3s;pointer-events:auto;cursor:pointer;
+}
+.slider-btn:hover{background:var(--gold);color:var(--bg);transform:scale(1.1)}
+.slider-btn:disabled{opacity:.2;cursor:not-allowed;transform:none}
+
+/* Slider Dots */
+.slider-dots{display:flex;justify-content:center;gap:8px;margin-top:24px}
+.slider-dot{
+  width:10px;height:10px;border-radius:50%;background:rgba(201,168,76,.2);
+  transition:all .3s;cursor:pointer;border:2px solid transparent;
+}
+.slider-dot:hover{background:rgba(201,168,76,.4)}
+.slider-dot.active{background:var(--gold);transform:scale(1.4);box-shadow:0 0 15px rgba(201,168,76,.5)}
 
 /* ========== LENS MODAL ========== */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .4s;padding:20px;backdrop-filter:blur(12px)}
@@ -354,13 +300,13 @@ button{cursor:pointer;border:none;font-family:inherit}
 .add-lens-btn:disabled{background:var(--text-dim);opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
 .add-lens-btn span{position:relative;z-index:1}
 
-.slider-nav{display:flex;justify-content:center;align-items:center;gap:24px;margin-top:36px}
-.slider-nav button{width:52px;height:52px;border-radius:50%;background:rgba(201,168,76,.04);color:var(--gold);font-size:22px;transition:all .3s;display:flex;align-items:center;justify-content:center;border:1px solid rgba(201,168,76,.06)}
-.slider-nav button:hover{background:var(--gold);color:var(--bg);transform:scale(1.1)}
-.slider-nav button:disabled{opacity:.12;cursor:not-allowed;transform:none}
-.slider-dots{display:flex;align-items:center;gap:10px}
-.slider-dot{width:10px;height:10px;border-radius:50%;background:rgba(201,168,76,.12);transition:all .3s;cursor:pointer}
-.slider-dot.active{background:var(--gold);transform:scale(1.5);box-shadow:0 0 14px rgba(201,168,76,.5)}
+.slider-nav-modal{display:flex;justify-content:center;align-items:center;gap:24px;margin-top:36px}
+.slider-nav-modal button{width:52px;height:52px;border-radius:50%;background:rgba(201,168,76,.04);color:var(--gold);font-size:22px;transition:all .3s;display:flex;align-items:center;justify-content:center;border:1px solid rgba(201,168,76,.06)}
+.slider-nav-modal button:hover{background:var(--gold);color:var(--bg);transform:scale(1.1)}
+.slider-nav-modal button:disabled{opacity:.12;cursor:not-allowed;transform:none}
+.slider-dots-modal{display:flex;align-items:center;gap:10px}
+.slider-dot-modal{width:10px;height:10px;border-radius:50%;background:rgba(201,168,76,.12);transition:all .3s;cursor:pointer}
+.slider-dot-modal.active{background:var(--gold);transform:scale(1.5);box-shadow:0 0 14px rgba(201,168,76,.5)}
 
 /* CART */
 .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:3000;opacity:0;visibility:hidden;transition:all .3s}
@@ -424,15 +370,15 @@ button{cursor:pointer;border:none;font-family:inherit}
 .footer{text-align:center;padding:50px 5%;border-top:1px solid rgba(201,168,76,.04);color:var(--text-dim);font-size:13px;position:relative;z-index:2}
 
 /* RESPONSIVE */
-@media(max-width:1024px){.color-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1024px){.slider-card{flex:0 0 300px}}
 @media(max-width:768px){
   .hero-sphere-wrap{width:350px;height:350px}
   .hero-glass{padding:40px 28px;border-radius:28px}
   .hero-logo-wrap svg{width:80px;height:80px}
-  .color-grid{grid-template-columns:1fr;gap:20px}
-  .card-visual{height:220px}
-  .card-lens-sphere{width:120px;height:120px}
-  .card-lens-inner{width:100px;height:100px}
+  .slider-card{flex:0 0 280px}
+  .card-visual{height:180px}
+  .card-lens-sphere{width:110px;height:110px}
+  .card-lens-inner{width:90px;height:90px}
   .lens-slide{flex-direction:column;text-align:center}
   .lens-visual{width:200px;height:200px}
   .lens-visual-inner{width:170px;height:170px}
@@ -444,10 +390,13 @@ button{cursor:pointer;border:none;font-family:inherit}
   .cart-panel{width:100%}
   .inv-box{padding:28px}
   .modal-box{max-height:95vh}
+  .slider-track{padding:20px 10px}
+  .slider-btn{width:40px;height:40px;font-size:16px}
 }
 @media(max-width:480px){
   .hero-glass{padding:32px 20px}
-  .card-content{padding:20px 22px}
+  .card-body{padding:16px 20px}
+  .slider-card{flex:0 0 260px}
 }
 
 @media print{body *{visibility:hidden}.inv-box,.inv-box *{visibility:visible}.inv-box{position:absolute;top:0;left:0;width:100%;padding:20px}.inv-actions{display:none!important}}
@@ -472,20 +421,13 @@ button{cursor:pointer;border:none;font-family:inherit}
 <!-- HERO -->
 <header class="hero">
   <div class="hero-bg"></div>
-  
-  <!-- ✨ HERO SPHERE -->
   <div class="hero-sphere-wrap">
     <div class="hero-sphere"></div>
     <div class="sphere-particles">
-      <div class="sphere-particle"></div>
-      <div class="sphere-particle"></div>
-      <div class="sphere-particle"></div>
-      <div class="sphere-particle"></div>
-      <div class="sphere-particle"></div>
-      <div class="sphere-particle"></div>
+      <div class="sphere-particle"></div><div class="sphere-particle"></div><div class="sphere-particle"></div>
+      <div class="sphere-particle"></div><div class="sphere-particle"></div><div class="sphere-particle"></div>
     </div>
   </div>
-  
   <div class="hero-glass">
     <div class="hero-logo-wrap">
       <svg viewBox="0 0 120 120" fill="none">
@@ -513,14 +455,22 @@ button{cursor:pointer;border:none;font-family:inherit}
   <div class="hero-scroll"><span>اكتشفي</span><div class="scroll-line"></div></div>
 </header>
 
-<!-- CATEGORIES -->
+<!-- CATEGORIES - SLIDER -->
 <section class="categories-section">
   <div class="section-header">
     <div class="section-label">👁️ مجموعتنا</div>
     <h2 class="section-title">اختاري لونك المفضل</h2>
-    <p class="section-sub">كل لون يحتوي على تدرجات متعددة — اكتشفيها بنفسك</p>
+    <p class="section-sub">اسحبي يمين أو شمال لاكتشاف كل الألوان ✨</p>
   </div>
-  <div class="color-grid" id="colorGrid"></div>
+  
+  <div class="slider-wrapper">
+    <div class="slider-nav">
+      <button class="slider-btn" id="prevBtn" onclick="slideMove(-1)">←</button>
+      <button class="slider-btn" id="nextBtn" onclick="slideMove(1)">→</button>
+    </div>
+    <div class="slider-track" id="sliderTrack"></div>
+    <div class="slider-dots" id="sliderDots"></div>
+  </div>
 </section>
 
 <!-- LENS MODAL -->
@@ -529,10 +479,10 @@ button{cursor:pointer;border:none;font-family:inherit}
     <div class="modal-header"><h2 id="modalTitle"></h2><button class="modal-close" onclick="closeLensModal()">✕</button></div>
     <div class="slider-area">
       <div class="lens-slider-container"><div class="lens-slider-track" id="lensTrack"></div></div>
-      <div class="slider-nav">
-        <button onclick="slideMove(-1)" id="prevBtn">→</button>
-        <div class="slider-dots" id="sliderDots"></div>
-        <button onclick="slideMove(1)" id="nextBtn">←</button>
+      <div class="slider-nav-modal">
+        <button onclick="slideLensMove(-1)" id="lensPrevBtn">→</button>
+        <div class="slider-dots-modal" id="lensSliderDots"></div>
+        <button onclick="slideLensMove(1)" id="lensNextBtn">←</button>
       </div>
     </div>
   </div>
@@ -548,43 +498,41 @@ button{cursor:pointer;border:none;font-family:inherit}
 
 <!-- INVOICE -->
 <div class="inv-overlay" id="invOverlay"><div class="inv-box" id="invBox"></div></div>
-
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
-
 <div class="footer">© 2025 LENSORA — جميع الحقوق محفوظة ✨</div>
 
 <script>
 const COLORS_DATA=[
-  {id:'brown',arName:'بني دافئ',swatch:'#8B5E3C',natureBg:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80',lenses:[
+  {id:'brown',arName:'بني دافئ',swatch:'#8B5E3C',natureBg:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',lenses:[
     {id:'b1',name:'عسل ذهبي',desc:'تدرج عسلي دافئ مع حلقة خارجية ناعمة',price:85,stock:30,color:'#D4A056',gradient:'radial-gradient(circle at 40% 35%,#D4A056,#8B5E3C,#5C3A1E)'},
     {id:'b2',name:'شوكولاتة',desc:'بني غامق عميق يعطي نظرة ساحرة',price:95,stock:22,color:'#5C3A1E',gradient:'radial-gradient(circle at 40% 35%,#7B5230,#4A2A10,#2E1808)'},
     {id:'b3',name:'كراميل',desc:'بني فاتح كريمي مثالي',price:90,stock:18,color:'#C68642',gradient:'radial-gradient(circle at 40% 35%,#C68642,#8B5E3C,#5C3A1E)'},
     {id:'b4',name:'بندق',desc:'بني متوسط مع لمسات ذهبية',price:88,stock:0,color:'#8B7355',gradient:'radial-gradient(circle at 40% 35%,#A0845C,#7B6B4F,#5A4D36)'}
   ]},
-  {id:'blue',arName:'أزرق ساحر',swatch:'#4A90D9',natureBg:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80',lenses:[
+  {id:'blue',arName:'أزرق ساحر',swatch:'#4A90D9',natureBg:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',lenses:[
     {id:'bl1',name:'محيط',desc:'أزرق محيطي عميق مع لمعة طبيعية',price:110,stock:25,color:'#2E6CB5',gradient:'radial-gradient(circle at 40% 35%,#5B9BD5,#2E6CB5,#1B3A5C)'},
     {id:'bl2',name:'سماء',desc:'أزرق سماوي فاتح براقة',price:100,stock:15,color:'#87CEEB',gradient:'radial-gradient(circle at 40% 35%,#87CEEB,#5BA3D9,#3A7BBF)'},
     {id:'bl3',name:'ثلجي',desc:'أزرق فاتح ثلجي مذهل',price:120,stock:8,color:'#B8D4E8',gradient:'radial-gradient(circle at 40% 35%,#D0E4F0,#A8C8DC,#7BAFC8)'},
     {id:'bl4',name:'زفير',desc:'أزرق بنفسجي غامض',price:115,stock:12,color:'#5B6CBF',gradient:'radial-gradient(circle at 40% 35%,#7B8CDF,#4A5AAF,#2E3A7B)'}
   ]},
-  {id:'green',arName:'أخضر زمردي',swatch:'#5CAB68',natureBg:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80',lenses:[
+  {id:'green',arName:'أخضر زمردي',swatch:'#5CAB68',natureBg:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80',lenses:[
     {id:'g1',name:'زيتون',desc:'أخضر زيتوني ناعم',price:105,stock:20,color:'#6B8E4E',gradient:'radial-gradient(circle at 40% 35%,#8BA85C,#6B8E4E,#4A6B32)'},
     {id:'g2',name:'زمردي',desc:'أخضر زمردي فاخر لامع',price:130,stock:10,color:'#2E8B57',gradient:'radial-gradient(circle at 40% 35%,#3CB371,#2E8B57,#1B5E3B)'},
     {id:'g3',name:'فيروزي',desc:'أخضر فيروزي مائي منعش',price:115,stock:5,color:'#40B5A5',gradient:'radial-gradient(circle at 40% 35%,#5CD4C4,#40B5A5,#2A8A7B)'},
     {id:'g4',name:'غابة',desc:'أخضر غامق غامض',price:108,stock:14,color:'#2E6B3B',gradient:'radial-gradient(circle at 40% 35%,#3E8B4B,#2E6B3B,#1B4B28)'}
   ]},
-  {id:'gray',arName:'رمادي أنيق',swatch:'#8A8A8A',natureBg:'https://images.unsplash.com/photo-1464822759085-2f366f9c9c6b?w=600&q=80',lenses:[
+  {id:'gray',arName:'رمادي أنيق',swatch:'#8A8A8A',natureBg:'https://images.unsplash.com/photo-1464822759085-2f366f9c9c6b?w=800&q=80',lenses:[
     {id:'gr1',name:'فضي',desc:'رمادي فضي لامع أنيق',price:100,stock:28,color:'#B8B8B8',gradient:'radial-gradient(circle at 40% 35%,#D0D0D0,#A8A8A8,#787878)'},
     {id:'gr2',name:'فحمي',desc:'رمادي فحمي قوي',price:95,stock:16,color:'#4A4A4A',gradient:'radial-gradient(circle at 40% 35%,#6A6A6A,#3A3A3A,#202020)'},
     {id:'gr3',name:'دخاني',desc:'رمادي دخاني بلمسة بنفسجية',price:105,stock:7,color:'#6B6B7B',gradient:'radial-gradient(circle at 40% 35%,#8B8B9B,#6B6B7B,#4A4A5A)'}
   ]},
-  {id:'hazel',arName:'عسلي مميز',swatch:'#A0845C',natureBg:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80',lenses:[
+  {id:'hazel',arName:'عسلي مميز',swatch:'#A0845C',natureBg:'https://images.unsplash.com/photo-1470770903676-69b98201ea1c?w=800&q=80',lenses:[
     {id:'hz1',name:'لوز',desc:'عسلي لوزي فاتح طبيعي',price:95,stock:32,color:'#C4A265',gradient:'radial-gradient(circle at 40% 35%,#D4B878,#C4A265,#8B7355)'},
     {id:'hz2',name:'نحاسي',desc:'عسلي نحاسي دافئ ببريق',price:100,stock:20,color:'#B87333',gradient:'radial-gradient(circle at 40% 35%,#D4944A,#B87333,#7B4A1E)'},
     {id:'hz3',name:'ذهبي',desc:'عسلي ذهبي لامع',price:110,stock:3,color:'#D4A056',gradient:'radial-gradient(circle at 40% 35%,#E8C070,#D4A056,#8B6A32)'}
   ]},
-  {id:'purple',arName:'بنفسجي ملكي',swatch:'#7B5EA7',natureBg:'https://images.unsplash.com/photo-1490750967868-58cb75069ed6?w=600&q=80',lenses:[
+  {id:'purple',arName:'بنفسجي ملكي',swatch:'#7B5EA7',natureBg:'https://images.unsplash.com/photo-1490750967868-58cb75069ed6?w=800&q=80',lenses:[
     {id:'p1',name:'لافندر',desc:'بنفسجي لافندر رومانسي',price:110,stock:18,color:'#A88BC5',gradient:'radial-gradient(circle at 40% 35%,#C5A8DC,#A88BC5,#7B5EA7)'},
     {id:'p2',name:'أرجواني',desc:'بنفسجي غامق ملكي',price:120,stock:11,color:'#6B3FA0',gradient:'radial-gradient(circle at 40% 35%,#8B5FC0,#6B3FA0,#4B2A70)'},
     {id:'p3',name:'ليلكي',desc:'بنفسجي فاتح ليلكي',price:115,stock:6,color:'#9B7FBF',gradient:'radial-gradient(circle at 40% 35%,#B89FD4,#9B7FBF,#7B5FA0)'}
@@ -594,71 +542,90 @@ const COLORS_DATA=[
 let products=JSON.parse(localStorage.getItem('lensora_products'))||initProducts();
 let cart=JSON.parse(localStorage.getItem('lensora_cart'))||[];
 let orders=JSON.parse(localStorage.getItem('lensora_orders'))||[];
-let currentColorIdx=0,currentLensIdx=0;
+let currentSlide=0,currentLensIdx=0;
 
 function initProducts(){let p=[];COLORS_DATA.forEach(c=>c.lenses.forEach(l=>p.push({...l,categoryId:c.id,categoryName:c.arName})));return p}
 function saveData(){localStorage.setItem('lensora_products',JSON.stringify(products));localStorage.setItem('lensora_cart',JSON.stringify(cart));localStorage.setItem('lensora_orders',JSON.stringify(orders))}
 function getProd(id){return products.find(p=>p.id===id)}
 
-/* ========== RENDER CARDS ========== */
-function renderCategories(){
-  const grid=document.getElementById('colorGrid');
-  grid.innerHTML=COLORS_DATA.map((c,ci)=>{
+/* ========== RENDER SLIDER CARDS ========== */
+function renderSlider(){
+  const track=document.getElementById('sliderTrack');
+  const dots=document.getElementById('sliderDots');
+  
+  track.innerHTML=COLORS_DATA.map((c,ci)=>{
     const totalStock=c.lenses.reduce((s,l)=>s+getProd(l.id).stock,0);
     const dots=c.lenses.map(l=>`<div class="card-dot" style="background:${l.gradient}"></div>`).join('');
     const mainLens=c.lenses[0];
-    const sphereGrad=mainLens.gradient;
     return `
-      <div class="color-card" data-card data-delay="${ci*.12}">
-        <!-- ✨ Nature Background -->
-        <div class="card-nature-bg" style="background-image:url('${c.natureBg}')"></div>
+      <div class="slider-card" style="--nature-bg:url('${c.natureBg}')" onclick="openLensModal(${ci})">
+        <div class="card-border"></div>
         <div class="shimmer"></div>
         <div class="card-visual">
-          <div class="card-visual-bg" style="background:radial-gradient(ellipse at 50% 40%,${mainLens.color}22 0%,transparent 60%),linear-gradient(180deg,rgba(18,14,12,0) 0%,var(--card-bg) 100%)"></div>
+          <div class="card-visual-bg" style="background:${c.natureBg} center/cover no-repeat"></div>
           <div class="card-lens-sphere">
-            <div class="card-lens-inner" style="background:${sphereGrad}"></div>
+            <div class="card-lens-inner" style="background:${mainLens.gradient}"></div>
           </div>
           <div class="card-dots">${dots}</div>
         </div>
-        <div class="card-content">
-          <div class="card-badge"><span class="badge-dot"></span>${c.arName}</div>
-          <div class="card-name">${c.lenses[0].name}</div>
-          <div class="card-count">${c.lenses.length} تدرجات · ${totalStock} قطعة متاحة</div>
+        <div class="card-body">
+          <div class="card-badge"><span class="dot"></span>${c.arName}</div>
+          <div class="card-name">${mainLens.name}</div>
+          <div class="card-count">${c.lenses.length} تدرجات · ${totalStock} قطعة</div>
           <div class="card-footer">
-            <div class="card-price">يبدأ من <strong>${getProd(c.lenses[0].id).price} ر.س</strong></div>
-            <button class="card-btn" onclick="openLensModal(${ci})"><span>تصفحي ←</span></button>
+            <div class="card-price">من <strong>${getProd(mainLens.id).price} ر.س</strong></div>
+            <button class="card-btn"><span>اكتشفي ✦</span></button>
           </div>
         </div>
       </div>
     `;
   }).join('');
-
-  // Staggered reveal with enhanced animation
-  requestAnimationFrame(()=>{
-    const cards=document.querySelectorAll('[data-card]');
-    cards.forEach((card,i)=>{
-      const delay=parseFloat(card.getAttribute('data-delay'))*1000+i*80;
-      setTimeout(()=>{
-        card.classList.add('revealed');
-        // Add subtle float animation after reveal
-        card.style.animationDelay = `${i * 0.3}s`;
-      },delay);
-    });
+  
+  // Update nature backgrounds
+  document.querySelectorAll('.slider-card').forEach((card,i)=>{
+    card.style.setProperty('--nature-bg',`url('${COLORS_DATA[i].natureBg}')`);
+    card.querySelector('.card-visual-bg').style.backgroundImage=`url('${COLORS_DATA[i].natureBg}')`;
+    card.style.setProperty('--card-color',COLORS_DATA[i].swatch);
   });
+  
+  // Render dots
+  dots.innerHTML=COLORS_DATA.map((_,i)=>`<div class="slider-dot ${i===0?'active':''}" onclick="goToSlide(${i})"></div>`).join('');
+  
+  updateSlider();
 }
+
+function updateSlider(){
+  const track=document.getElementById('sliderTrack');
+  const cardWidth=340+24; // card width + gap
+  track.style.transform=`translateX(-${currentSlide*cardWidth}px)`;
+  
+  // Update dots
+  document.querySelectorAll('.slider-dot').forEach((d,i)=>d.classList.toggle('active',i===currentSlide));
+  
+  // Update buttons
+  document.getElementById('prevBtn').disabled=currentSlide===0;
+  document.getElementById('nextBtn').disabled=currentSlide>=COLORS_DATA.length-1;
+}
+
+function slideMove(dir){
+  const max=COLORS_DATA.length-1;
+  currentSlide=Math.max(0,Math.min(max,currentSlide+dir));
+  updateSlider();
+}
+function goToSlide(i){currentSlide=i;updateSlider();}
 
 /* ========== LENS MODAL ========== */
 function openLensModal(ci){
-  currentColorIdx=ci;currentLensIdx=0;
+  currentLensIdx=0;
   document.getElementById('modalTitle').textContent=COLORS_DATA[ci].arName;
-  renderSlider();
+  renderLensSlider(ci);
   document.getElementById('lensModal').classList.add('open');
   document.body.style.overflow='hidden';
 }
 function closeLensModal(){document.getElementById('lensModal').classList.remove('open');document.body.style.overflow=''}
 
-function renderSlider(){
-  const cat=COLORS_DATA[currentColorIdx];
+function renderLensSlider(ci){
+  const cat=COLORS_DATA[ci];
   document.getElementById('lensTrack').innerHTML=cat.lenses.map((l,li)=>{
     const p=getProd(l.id);
     const sc=p.stock===0?'stock-out':p.stock<=5?'stock-low':'';
@@ -691,25 +658,26 @@ function renderSlider(){
       </div>
     `;
   }).join('');
-  document.getElementById('sliderDots').innerHTML=cat.lenses.map((_,li)=>`<div class="slider-dot ${li===currentLensIdx?'active':''}" onclick="goToSlide(${li})"></div>`).join('');
-  updateSliderPos();
+  document.getElementById('lensSliderDots').innerHTML=cat.lenses.map((_,li)=>`<div class="slider-dot-modal ${li===0?'active':''}" onclick="goToLensSlide(${li})"></div>`).join('');
+  updateLensSlider();
 }
 
-function updateSliderPos(){
+function updateLensSlider(){
   document.getElementById('lensTrack').style.transform=`translateX(${currentLensIdx*100}%)`;
-  document.querySelectorAll('.slider-dot').forEach((d,i)=>d.classList.toggle('active',i===currentLensIdx));
-  const cat=COLORS_DATA[currentColorIdx];
-  document.getElementById('prevBtn').disabled=currentLensIdx===0;
-  document.getElementById('nextBtn').disabled=currentLensIdx>=cat.lenses.length-1;
+  document.querySelectorAll('.slider-dot-modal').forEach((d,i)=>d.classList.toggle('active',i===currentLensIdx));
+  const cat=COLORS_DATA[COLORS_DATA.findIndex(c=>c.lenses.some(l=>l.id===document.getElementById('lensTrack').children[0]?.querySelector('.add-lens-btn')?.onclick?.toString().match(/'([^']+)'/)?.[1]))]||COLORS_DATA[0];
+  document.getElementById('lensPrevBtn').disabled=currentLensIdx===0;
+  document.getElementById('lensNextBtn').disabled=currentLensIdx>=cat.lenses.length-1;
 }
-function slideMove(dir){const cat=COLORS_DATA[currentColorIdx];currentLensIdx=Math.max(0,Math.min(cat.lenses.length-1,currentLensIdx+dir));updateSliderPos()}
-function goToSlide(i){currentLensIdx=i;updateSliderPos()}
+function slideLensMove(dir){const cat=COLORS_DATA.find(c=>c.lenses.length>currentLensIdx);if(!cat)return;currentLensIdx=Math.max(0,Math.min(cat.lenses.length-1,currentLensIdx+dir));updateLensSlider()}
+function goToLensSlide(i){currentLensIdx=i;updateLensSlider()}
 
 function changeModalQty(delta,li){
   const el=document.getElementById(`mq_${li}`);
   let v=parseInt(el.textContent)+delta;
-  const p=getProd(COLORS_DATA[currentColorIdx].lenses[li].id);
-  v=Math.max(1,Math.min(v,Math.max(1,p.stock)));
+  const cat=COLORS_DATA.find(c=>c.lenses[li]);
+  const p=getProd(cat?.lenses[li]?.id);
+  v=Math.max(1,Math.min(v,Math.max(1,p?.stock||1)));
   el.textContent=v;
 }
 
@@ -723,7 +691,6 @@ function addFromSlider(lensId,li){
   saveData();updateCartBadge();
   showToast(`✅ تمت إضافة "${p.name}" (${qty} قطعة)`);
   document.getElementById(`mq_${li}`).textContent='1';
-  renderSlider();
 }
 
 /* ========== CART ========== */
@@ -787,7 +754,7 @@ function checkout(){
   const ship=sub>=200?0:15;const total=sub+ship;
   const order={id:'LSR-'+Date.now().toString(36).toUpperCase(),date:new Date().toLocaleDateString('ar-SA',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}),items,sub,ship,total,status:'completed'};
   orders.push(order);saveData();showInvoice(order);
-  cart=[];saveData();updateCartBadge();closeCart();renderCategories();
+  cart=[];saveData();updateCartBadge();closeCart();renderSlider();
   showToast('✅ تم الشراء بنجاح!');
 }
 
@@ -812,8 +779,17 @@ function closeInvoice(){document.getElementById('invOverlay').classList.remove('
 /* ========== TOAST ========== */
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
 
-/* ========== KEYBOARD ========== */
+/* ========== KEYBOARD & TOUCH ========== */
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeLensModal();closeCart();closeInvoice()}});
+
+// Touch swipe support for slider
+let touchStartX=0,touchEndX=0;
+document.getElementById('sliderTrack').addEventListener('touchstart',e=>touchStartX=e.changedTouches[0].screenX);
+document.getElementById('sliderTrack').addEventListener('touchend',e=>{
+  touchEndX=e.changedTouches[0].screenX;
+  if(touchStartX-touchEndX>50)slideMove(1);
+  if(touchEndX-touchStartX>50)slideMove(-1);
+});
 
 /* ========== PARTICLES ========== */
 const canvas=document.getElementById('particlesCanvas');const ctx=canvas.getContext('2d');let particles=[];
@@ -830,7 +806,7 @@ for(let i=0;i<60;i++)particles.push(new Particle());
 window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60)});
 
 /* ========== INIT ========== */
-renderCategories();updateCartBadge();
+renderSlider();updateCartBadge();
 </script>
 </body>
 </html>
